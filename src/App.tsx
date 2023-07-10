@@ -1,27 +1,15 @@
+import { Box, SxProps } from "@mui/material";
 import React from "react";
-import "./App.css";
-import { Popover } from "antd";
-
-function App() {
+import { FormProvider, useForm } from "react-hook-form";
+export type MPorops = {
+    maxHeight?: string | number;
+    bodySx?: SxProps;
+};
+export const App = (props: MPorops) => {
+    const formState = useForm<MPorops>();
     return (
-        <Popover
-            showArrow={false}
-            content={
-                <div
-                    style={{
-                        width: 100,
-                        height: 100,
-                        backgroundColor: "blue",
-                    }}></div>
-            }>
-            <div
-                style={{
-                    width: 100,
-                    height: 100,
-                    backgroundColor: "red",
-                }}></div>
-        </Popover>
+        <FormProvider {...formState}>
+            <input {...formState.register("maxHeight")} />
+        </FormProvider>
     );
-}
-
-export default App;
+};
